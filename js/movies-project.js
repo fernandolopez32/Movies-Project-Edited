@@ -39,9 +39,11 @@ $(function(){
                     console.log(movie.title);
                     $("#movies").append(`
                     <div class="card" style="width: 18rem;">
-                    <img src="${movie.poster}" class="card-img-top" alt="...">
-                    <div class="card-body"
-                    <p class="card-text">Title: ${movie.title}</p>
+                        <img src="${movie.poster}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Title: ${movie.title} (${movie.year})</h5>
+                            <p class="card-text">${movie.plot}</p>
+                        </div>
                     </div>
 
                     `)
