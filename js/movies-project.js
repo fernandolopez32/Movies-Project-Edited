@@ -39,7 +39,7 @@ $(function(){
 
 
     async function theMoviesDataBaseURL(){
-        let response = await fetch(`https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2022-10-04&api_key=${J_TBD_TOKEN}`);
+        let response = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${J_TBD_TOKEN}`);
         response = await response.json();
         let events = response;
         console.log(events);
