@@ -51,12 +51,14 @@ $(function(){
 
 //The R in CRUD is Read
 
+    /*=====================FUNCTION THAT PRODUCES MOVIE CARDS=============*/
 
     function getMovies(){
         fetch("https://stingy-prickle-sternum.glitch.me/movies")
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                $("#movies").empty();
                 data.forEach((movie, index) => {
                     console.log(movie.title);
                     $("#movies").append(`
@@ -125,6 +127,35 @@ $(function(){
         },
         body: JSON.stringify(modification)
     }
+
+/*======================MODIFYING TITLES===================*/
+
+    let modifyDown = {
+        title: "Black Hawk Down"
+    }
+
+    let modifyTenet = {
+        title: "Tenet"
+    }
+
+    const patchTenet = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(modifyTenet)
+    }
+
+    const patchDown = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(modifyDown)
+    }
+
+    fetch(moviesURL+ "/2", patchDown).then(getMovies);
+    fetch(moviesURL+ "/3", patchTenet).then(getMovies);
 
 //We need to grab the ID from the book we are modifying
 
