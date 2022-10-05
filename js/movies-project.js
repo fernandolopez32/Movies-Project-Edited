@@ -49,6 +49,29 @@ $(function(){
 
     theMoviesDataBaseURL();
 
+    // $("#userNameInput").keyup(function(e){
+//     console.log(e.key)
+//     if (e.key === "Enter"){
+//         // userName = $(this).val();
+//         // usersLastCommitDate = gitUserLastCommitAsync(userName);
+//         gitUserLastCommitAsync($(this).val()).then(response => $("#output").text(`${response}`))/
+//     }
+//
+// })
+
+    // $("#userFavMovie").keyup(function(e){
+    //     console.log(e.key)
+    //     if(e.key === "Enter"){
+    //         theMoviesDataBaseURL($(this).val()).then(response =>$(#movies.a))
+    //     }
+    // })
+
+
+
+
+
+
+
 //The R in CRUD is Read
 
     /*=====================FUNCTION THAT PRODUCES MOVIE CARDS=============*/
@@ -165,21 +188,37 @@ $(function(){
 
 //PUT Request
 
-    modification = {
-        title: "Eleanor of Aquitaine and the Four Kings",
-        author: {
-            firstName: "Amy",
-            lastName: "Kelly"
-        }
-    }
+    $("#userFavMovie").keyup(function(e){
+        console.log(e.key)
+        if(e.key === "Enter"){
+            let usersMovie = {
+                title: `${$(this).val()}`,
 
-    const putOptions = {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(modification)
-    }
+            }
+            console.log(usersMovie)
+            let putOptions = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(usersMovie)
+            }
+            fetch(moviesURL, putOptions).then(getMovies)
+        }
+    })
+
+   // let usersMovie = {
+   //      title: `${$("#userFavMovie").val()}`,
+   //
+   //  }
+   //
+   //  const putOptions = {
+   //      method: "PUT",
+   //      headers: {
+   //          "Content-Type": "application/json"
+   //      },
+   //      body: JSON.stringify(modification)
+   //  }
 
 //This will put the updated modifications to the 1st book
 // fetch(booksURL +"/1", putOptions).then(getBooks);
