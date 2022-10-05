@@ -11,3 +11,6 @@ footer {
     background: black;
     color: white;
 }
+.hiddenForm{
+    display: none;
+}

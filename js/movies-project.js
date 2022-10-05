@@ -89,10 +89,19 @@ $(function(){
                         <div class="card-body">
                             <h5 class="card-title">Title: ${movie.title} (${movie.year})</h5>
                             <p class="card-text">${movie.plot}</p>
-                            <button id="eddit${movie.id}" class="button btn-primary">Edit</button>
+                            <button id="edit${movie.id}" class="button btn-primary">Edit</button>
                             <button id="delete${movie.id}" class="button btn-danger">Delete</button>
                         </div>
+                        
+                        <div class="editForm hiddenForm">
+                            <label for="title" class="form-label">Movie Title</label>
+                            <input type="email" class="form-control" id="title" placeholder="What is your favorite movie">
+                            <button type="submit">Submit</button>
+                        </div>
+                       
+                        
                     </div>
+                    
 
                     `)
                     $(`#delete${movie.id}`).on("click", function () {
@@ -104,6 +113,11 @@ $(function(){
                         }
                         fetch(moviesURL + "/"+ movie.id, deleteOptions).then(getMovies)
                     });
+
+                    $(`#edit${movie.id}`).on('click',function (){
+                        $(this).parent().next().toggleClass('hiddenForm')
+
+                    })
                 })
             });
         }//End of getMovies Function
@@ -111,17 +125,6 @@ $(function(){
     // getMovies();
 
     /*======================DELETE A MOVIE=========================*/
-
-deleteMovie();
-function deleteMovie() {
-    fetch("https://stingy-prickle-sternum.glitch.me/movies")
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.id);
-
-        })
-}
-
 
 //The C in CRUD is Create:
 
