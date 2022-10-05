@@ -33,7 +33,20 @@ $(function(){
     function getMovies(){
         fetch("https://stingy-prickle-sternum.glitch.me/movies")
             .then(response => response.json())
-            .then(data => console.log(data));
+            .then(data => {
+                console.log(data)
+                data.forEach((movie, index) => {
+                    console.log(movie.title);
+                    $("#movies").append(`
+                    <div class="card" style="width: 18rem;">
+                    <img src="${movie.poster}" class="card-img-top" alt="...">
+                    <div class="card-body"
+                    <p class="card-text">Title: ${movie.title}</p>
+                    </div>
+
+                    `)
+                })
+            });
     }
 
     getMovies();
@@ -123,7 +136,7 @@ $(function(){
         }
     }
 
-    fetch(booksURL +"/1", deleteOptions).then(getBooks);
+    // fetch(booksURL +"/1", deleteOptions).then(getBooks);
 
 //Loading Message: setTimeout
 
