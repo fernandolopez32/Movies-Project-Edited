@@ -95,6 +95,15 @@ $(function(){
                     </div>
 
                     `)
+                    $(`#delete${movie.id}`).on("click", function () {
+                        const deleteOptions = {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "applications/json"
+                            }
+                        }
+                        fetch(moviesURL + "/"+ movie.id, deleteOptions).then(getMovies)
+                    });
                 })
             });
         }//End of getMovies Function
@@ -103,21 +112,13 @@ $(function(){
 
     /*======================DELETE A MOVIE=========================*/
 
-
+deleteMovie();
 function deleteMovie() {
     fetch("https://stingy-prickle-sternum.glitch.me/movies")
         .then(response => response.json())
         .then(data => {
-            $(`#delete${data.id}`).on("click", function () {
-                console.log(data.id);
-                const deleteOptions = {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "applications/json"
-                    }
-                }
-                fetch(moviesURL + $([data - id]), deleteOptions).then(getMovies)
-            })
+            console.log(data.id);
+
         })
 }
 
