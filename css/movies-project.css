@@ -3,6 +3,10 @@
     width: 100px;
 }
 
+#movies{
+    overflow: scroll;
+    height: 60vh;
+}
 footer {
     background: black;
     color: white;

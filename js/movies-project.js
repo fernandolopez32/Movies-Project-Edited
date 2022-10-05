@@ -60,7 +60,7 @@ $(function(){
                 data.forEach((movie, index) => {
                     console.log(movie.title);
                     $("#movies").append(`
-                    <div class="card" style="width: 18rem;">
+                    <div class="card col-4 mx-auto" style="width: 18rem;">
                         <img src="${movie.poster}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Title: ${movie.title} (${movie.year})</h5>
