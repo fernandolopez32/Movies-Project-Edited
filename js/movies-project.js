@@ -67,6 +67,8 @@ $(function(){
                         <div class="card-body">
                             <h5 class="card-title">Title: ${movie.title} (${movie.year})</h5>
                             <p class="card-text">${movie.plot}</p>
+                            <button id="eddit${movie.id}" class="button btn-primary">Edit</button>
+                            <button id="delete${movie.id}" class="button btn-danger">Delete</button>
                         </div>
                     </div>
 
