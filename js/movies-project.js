@@ -83,9 +83,8 @@ $(function(){
                 console.log(data)
                 $("#movies").empty();
                 data.forEach((movie, index) => {
-                    console.log(movie.title);
                     $("#movies").append(`
-                    <div class="card col-4 mx-auto" style="width: 18rem;">
+                    <div class="card col-4 mx-auto" data-id="${movie.id}" style="width: 18rem;">
                         <img src="${movie.poster}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Title: ${movie.title} (${movie.year})</h5>
@@ -98,9 +97,30 @@ $(function(){
                     `)
                 })
             });
-    }
+        }//End of getMovies Function
 
-    getMovies();
+    // getMovies();
+
+    /*======================DELETE A MOVIE=========================*/
+
+
+function deleteMovie() {
+    fetch("https://stingy-prickle-sternum.glitch.me/movies")
+        .then(response => response.json())
+        .then(data => {
+            $(`#delete${data.id}`).on("click", function () {
+                console.log(data.id);
+                const deleteOptions = {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "applications/json"
+                    }
+                }
+                fetch(moviesURL + $([data - id]), deleteOptions).then(getMovies)
+            })
+        })
+}
+
 
 //The C in CRUD is Create:
 
@@ -187,25 +207,29 @@ $(function(){
 // fetch(booksURL + "/1", patchOptions).then(getBooks);
 
 //PUT Request
+    /*=================ADDING A MOVIE FUNCTION==========================*/
+    addAMovie()
+    function addAMovie() {
+        $("#userFavMovie").keyup(function (e) {
+            if (e.key === "Enter") {
+                let usersMovie = {
+                    title: `${$(this).val()}`,
 
-    $("#userFavMovie").keyup(function(e){
-        console.log(e.key)
-        if(e.key === "Enter"){
-            let usersMovie = {
-                title: `${$(this).val()}`,
+                }
+                console.log(usersMovie)
+                let putOptions = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(usersMovie)
+                }
+                fetch(moviesURL, putOptions).then(getMovies)
+            }
+        })
+    }
 
-            }
-            console.log(usersMovie)
-            let putOptions = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(usersMovie)
-            }
-            fetch(moviesURL, putOptions).then(getMovies)
-        }
-    })
+
 
    // let usersMovie = {
    //      title: `${$("#userFavMovie").val()}`,
@@ -225,12 +249,10 @@ $(function(){
 
 //The D in CRUD is delete
 
-    const deleteOptions = {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "applications/json"
-        }
-    }
+
+
+
+
 
     // fetch(booksURL +"/1", deleteOptions).then(getBooks);
 
