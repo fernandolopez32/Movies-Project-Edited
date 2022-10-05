@@ -25,7 +25,29 @@ $(function(){
 
 
     const moviesURL = "https://stingy-prickle-sternum.glitch.me/movies"
+    //
+    // async function gitUserLastCommitAsync(username){
+    //     let response = await fetch(`https://api.github.com/users/${username}/events/public`,{headers: {"Authorization": GITHUB_PROMISES_TOKEN}});
+    //     response = await response.json();
+    //     let events = response;
+    //     const dateOfLastCommit = new Date(events[0].created_at);
+    //     console.log(dateOfLastCommit)
+    //     return dateOfLastCommit;
+    // }
+    //
+    // https://api.themoviedb.org/3/movie/550?api_key=
 
+
+    async function theMoviesDataBaseURL(){
+        let response = await fetch(`https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2022-10-04&api_key=${J_TBD_TOKEN}`);
+        response = await response.json();
+        let events = response;
+        console.log(events);
+        return events;
+
+    }
+
+    theMoviesDataBaseURL();
 
 //The R in CRUD is Read
 
@@ -172,3 +194,17 @@ $(function(){
 
 
 })//End of document.ready
+
+// $("#userNameInput").keyup(function(e){
+//     console.log(e.key)
+//     if (e.key === "Enter"){
+//         // userName = $(this).val();
+//         // usersLastCommitDate = gitUserLastCommitAsync(userName);
+//         gitUserLastCommitAsync($(this).val()).then(response => $("#output").text(`${response}`))/
+//     }
+//
+// })
+
+
+// cat ~/.gitignore_global shows you your git ignore
+// nano ~/.gitignore_global lets you add git ignore if you don’t have it
