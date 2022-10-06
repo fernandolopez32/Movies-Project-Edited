@@ -84,8 +84,8 @@ $(function(){
                 $("#movies").empty();
                 data.forEach((movie, index) => {
                     $("#movies").append(`
-                    <div class="card col-4 mx-auto" data-id="${movie.id}" style="width: 18rem;">
-                        <img src="${movie.poster}" class="card-img-top" alt="...">
+                    <div class="card col-4 mx-auto px-0 mb-4" data-id="${movie.id}" style="width: 18rem;">
+                        <img src="${movie.poster}" class="card-img-top " alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Title: ${movie.title} (${movie.year})</h5>
                             <p class="card-text">${movie.plot}</p>

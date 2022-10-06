@@ -11,15 +11,27 @@
     <link rel="stylesheet" href="css/movies-project.css">
 </head>
 <body>
-<!-- movies card container-->
-<div id="movies" class="row"></div>
-<!-- Input form-->
-<div class="mb-3">
-    <h3>What is your favorite movie?</h3>
-    <label for="userFavMovie" class="form-label">Movie Title</label>
-    <input type="email" class="form-control" id="userFavMovie" placeholder="What is your favorite movie">
-</div>
+    <!-- Nav bar-->
+    <nav class="navbar bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/movie_projector.ico" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Movies Project
+            </a>
+        </div>
+    </nav>
 
+    <!-- movies card container-->
+    <div id="movies" class="row mt-3"></div>
+
+    <!--Adding movie form -->
+    <div class="mb-3" id="addMovieForm">
+        <h3>What is your favorite movie?</h3>
+        <label for="userFavMovie" class="form-label">Movie Title</label>
+        <input type="email" class="form-control" id="userFavMovie" placeholder="What is your favorite movie">
+    </div>
+
+    <!-- Footer and credits    -->
     <footer class="d-flex align-items-center justify-content-center">
         <p class="mb-0 me-2">some data and images provide by:   </p><img src="img/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" id="tmdImage">
     </footer>
