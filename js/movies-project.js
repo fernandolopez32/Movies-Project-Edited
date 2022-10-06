@@ -162,10 +162,12 @@ $(function(){
             if (e.key === "Enter") {
                 usersMovie = $(this).val();
 
+                let poster;
                 function theMoviesDataBaseURL(userSearch){
                     fetch(`https://api.themoviedb.org/3/search/movie${J_TBD_TOKEN}&query=${userSearch}&include_adult=false`)
                     .then(response => response.json())
                     .then(data => {
+
                         console.log(data.results[0]);
                         let usersMovie = {
                             title: `${data.results[0].title}`,
