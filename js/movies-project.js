@@ -215,27 +215,27 @@ $(function(){
 
 //PUT Request
     /*=================ADDING A MOVIE FUNCTION==========================*/
-    addAMovie()
-    function addAMovie() {
-        $("#userFavMovie").keyup(function (e) {
-            if (e.key === "Enter") {
-                let usersMovie = {
-                    title: `${$(this).val()}`,
-                    poster: `"https://image.tmdb.org/t/p/"
-`
-                }
-                console.log(usersMovie)
-                let putOptions = {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(usersMovie)
-                }
-                fetch(moviesURL, putOptions).then(getMovies)
-            }
-        })
-    }
+//     addAMovie()
+//     function addAMovie() {
+//         $("#userFavMovie").keyup(function (e) {
+//             if (e.key === "Enter") {
+//                 let usersMovie = {
+//                     title: `${$(this).val()}`,
+//                     poster: `"https://image.tmdb.org/t/p/lxM6kqilAdpdhqUl2biYp5frUxE.jpg"
+// `
+//                 }
+//                 console.log(usersMovie)
+//                 let putOptions = {
+//                     method: "POST",
+//                     headers: {
+//                         "Content-Type": "application/json"
+//                     },
+//                     body: JSON.stringify(usersMovie)
+//                 }
+//                 fetch(moviesURL, putOptions).then(getMovies)
+//             }
+//         })
+//     }
 
 
 
@@ -274,6 +274,18 @@ $(function(){
 
     theMoviesDataBaseURL();
 
+
+    addAMovie()
+    function addAMovie() {
+        $("#userFavMovie").keyup(function (e) {
+            let usersMovie;
+            if (e.key === "Enter")
+                usersMovie = $(this).val()
+            theMoviesDataBaseURL(usersMovie).then(getMovies)
+        })
+
+
+    }
 
 
 
