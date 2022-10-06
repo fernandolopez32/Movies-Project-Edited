@@ -158,24 +158,39 @@ $(function(){
 //
     function postMovie() {
         $("#userFavMovie").keyup(function (e) {
+            let usersMovie
             if (e.key === "Enter") {
-                let usersMovie = {
-                    title: `${$(this).val()}`,
-                    poster: `"https://image.tmdb.org/t/p/w300${data.results[0].poster_path}"
-`
+                usersMovie = $(this).val();
+
+                function theMoviesDataBaseURL(userSearch){
+                    fetch(`https://api.themoviedb.org/3/search/movie${J_TBD_TOKEN}&query=${userSearch}&include_adult=false`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                    })
+
+//                 let usersMovie = {
+//                     title: `${$(this).val()}`,
+//                     poster: `"https://image.tmdb.org/t/p/w300${events.results[0].poster_path}"
+// `
+//                 }
+                // console.log(usersMovie)
+                // let putOptions = {
+                //     method: "POST",
+                //     headers: {
+                //         "Content-Type": "application/json"
+                //     },
+                //     body: JSON.stringify(usersMovie)
+                // }
+                // fetch(moviesURL, putOptions).then(getMovies)
                 }
-                console.log(usersMovie)
-                let putOptions = {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(usersMovie)
-                }
-                fetch(moviesURL, putOptions).then(getMovies)
+                theMoviesDataBaseURL(usersMovie);
             }
+
         })
     }
+
+    postMovie()
 
 
 
@@ -202,31 +217,13 @@ $(function(){
     // })
 
 
-    async function theMoviesDataBaseURL(userSearch){
-        let response = await fetch(`https://api.themoviedb.org/3/search/movie${J_TBD_TOKEN}&query=${userSearch}&include_adult=false`);
-        response = await response.json();
-        let events = response;
-        console.log(events);
-        return events;
-
-    }
 
 
-    theMoviesDataBaseURL();
 
 
-    addAMovie()
-    function addAMovie() {
-        $("#userFavMovie").keyup(function (e) {
-            let usersMovie;
-            if (e.key === "Enter") {
-                usersMovie = $(this).val()
-                theMoviesDataBaseURL(usersMovie).then(getMovies)
-            }
-        })
 
 
-    }
+
 
 
 
