@@ -26,28 +26,6 @@ $(function(){
 
     const moviesURL = "https://stingy-prickle-sternum.glitch.me/movies"
     //
-    // async function gitUserLastCommitAsync(username){
-    //     let response = await fetch(`https://api.github.com/users/${username}/events/public`,{headers: {"Authorization": GITHUB_PROMISES_TOKEN}});
-    //     response = await response.json();
-    //     let events = response;
-    //     const dateOfLastCommit = new Date(events[0].created_at);
-    //     console.log(dateOfLastCommit)
-    //     return dateOfLastCommit;
-    // }
-    //
-    // https://api.themoviedb.org/3/movie/550?api_key=
-
-
-    async function theMoviesDataBaseURL(){
-        let response = await fetch(`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${J_TBD_TOKEN}`);
-        response = await response.json();
-        let events = response;
-        console.log(events);
-        return events;
-
-    }
-
-    theMoviesDataBaseURL();
 
     // $("#userNameInput").keyup(function(e){
 //     console.log(e.key)
@@ -93,23 +71,20 @@ $(function(){
                             <button id="delete${movie.id}" class="button btn-danger">Delete</button>
                         </div>
                         
-                        <div class="editForm hiddenForm px-2 pb-3">
+                      <div class="editForm hiddenForm px-2 pb-3">
                             <label for="title" class="form-label">Movie Title</label>
-                            <input type="title" class="form-control" id="title" placeholder="What is your favorite movie">
+                            <input type="title" class="form-control" id="title${movie.id}" placeholder="What is your favorite movie">
                             
                             <label for="yearMade" class="form-label">Year</label>
-                            <input id="yearMade" class="form-control" placeholder="Year made">
+                            <input id="yearMade${movie.id}" class="form-control" placeholder="Year made">
                             
                             <label for="plot" class="form-label">Plot</label>
-                            <input id="plot" class="form-control" placeholder="Plot">
+                            <input id="plot${movie.id}" class="form-control" placeholder="Plot">
                             
-                            <button type="submit">Submit</button>
+                            <button id="submit${movie.id}" type="submit">Submit</button>
                         </div>
-                       
-                        
+   
                     </div>
-                    
-
                     `)
                     $(`#delete${movie.id}`).on("click", function () {
                         const deleteOptions = {
@@ -123,9 +98,27 @@ $(function(){
 
                     $(`#edit${movie.id}`).on('click',function (){
                         $(this).parent().next().toggleClass('hiddenForm')
+                    })
 
-                     })
 
+//selecting the button  in the form so that on click of the submit button the card info changes
+
+                    $(`#submit${movie.id}`).on('click',function (){
+                        // alert(`You clicked on the ${movie.id} button!`)
+                        let modification = {
+                            title: $(`#title${movie.id}`).val(),
+                            year: $(`#yearMade${movie.id}`).val(),
+                            plot: $(`#plot${movie.id}`).val()
+                        }
+                        const patchOption ={
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(modification)
+                        }
+                        fetch(moviesURL +"/"+ movie.id, patchOption).then(getMovies)
+                    })
 
 
                 })
@@ -228,7 +221,8 @@ $(function(){
             if (e.key === "Enter") {
                 let usersMovie = {
                     title: `${$(this).val()}`,
-
+                    poster: `"https://image.tmdb.org/t/p/"
+`
                 }
                 console.log(usersMovie)
                 let putOptions = {
@@ -242,6 +236,46 @@ $(function(){
             }
         })
     }
+
+
+
+
+    // async function gitUserLastCommitAsync(username){
+    //     let response = await fetch(`https://api.github.com/users/${username}/events/public`,{headers: {"Authorization": GITHUB_PROMISES_TOKEN}});
+    //     response = await response.json();
+    //     let events = response;
+    //     const dateOfLastCommit = new Date(events[0].created_at);
+    //     console.log(dateOfLastCommit)
+    //     return dateOfLastCommit;
+    // }
+    //
+    // https://api.themoviedb.org/3/movie/550?api_key=
+
+    // $("#userNameInput").keyup(function(e){
+    //     // console.log(e.key)
+    //     if (e.key === "Enter"){
+    //         // userName = $(this).val();
+    //         // usersLastCommitDate = gitUserLastCommitAsync(userName);
+    //         gitUserLastCommitAsync($(this).val()).then(response => $("#output").text(`${response}`))
+    //     }
+    //
+    // })
+
+
+    async function theMoviesDataBaseURL(userSearch){
+        let response = await fetch(`https://api.themoviedb.org/3/search/movie${J_TBD_TOKEN}&query=${userSearch}&include_adult=false`);
+        response = await response.json();
+        let events = response;
+        console.log(events);
+        return events;
+
+    }
+
+
+    theMoviesDataBaseURL();
+
+
+
 
 
 
