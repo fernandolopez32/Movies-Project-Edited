@@ -166,27 +166,27 @@ $(function(){
                     fetch(`https://api.themoviedb.org/3/search/movie${J_TBD_TOKEN}&query=${userSearch}&include_adult=false`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
-                    })
+                        console.log(data.results[0]);
+                        let usersMovie = {
+                            title: `${data.results[0].title}`,
+                            poster: "https://image.tmdb.org/t/p/w300$" + "/"`${data.results[0].poster_path}`,
+                            year: `${data.results[0].release_date.split("-")[0]}`
 
-//                 let usersMovie = {
-//                     title: `${$(this).val()}`,
-//                     poster: `"https://image.tmdb.org/t/p/w300${events.results[0].poster_path}"
-// `
-//                 }
-                // console.log(usersMovie)
-                // let putOptions = {
-                //     method: "POST",
-                //     headers: {
-                //         "Content-Type": "application/json"
-                //     },
-                //     body: JSON.stringify(usersMovie)
-                // }
-                // fetch(moviesURL, putOptions).then(getMovies)
+
+                        }
+                        console.log(usersMovie)
+                        let putOptions = {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(usersMovie)
+                        }
+                        fetch(moviesURL, putOptions).then(getMovies)
+                    })
                 }
                 theMoviesDataBaseURL(usersMovie);
             }
-
         })
     }
 
