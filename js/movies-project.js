@@ -93,9 +93,16 @@ $(function(){
                             <button id="delete${movie.id}" class="button btn-danger">Delete</button>
                         </div>
                         
-                        <div class="editForm hiddenForm">
+                        <div class="editForm hiddenForm px-2 pb-3">
                             <label for="title" class="form-label">Movie Title</label>
-                            <input type="email" class="form-control" id="title" placeholder="What is your favorite movie">
+                            <input type="title" class="form-control" id="title" placeholder="What is your favorite movie">
+                            
+                            <label for="yearMade" class="form-label">Year</label>
+                            <input id="yearMade" class="form-control" placeholder="Year made">
+                            
+                            <label for="plot" class="form-label">Plot</label>
+                            <input id="plot" class="form-control" placeholder="Plot">
+                            
                             <button type="submit">Submit</button>
                         </div>
                        
@@ -117,7 +124,10 @@ $(function(){
                     $(`#edit${movie.id}`).on('click',function (){
                         $(this).parent().next().toggleClass('hiddenForm')
 
-                    })
+                     })
+
+
+
                 })
             });
         }//End of getMovies Function
@@ -204,7 +214,7 @@ $(function(){
     }
 
     fetch(moviesURL+ "/2", patchDown).then(getMovies);
-    fetch(moviesURL+ "/3", patchTenet).then(getMovies);
+    // fetch(moviesURL+ "/3", patchTenet).then(getMovies);
 
 //We need to grab the ID from the book we are modifying
 
@@ -251,15 +261,6 @@ $(function(){
 //This will put the updated modifications to the 1st book
 // fetch(booksURL +"/1", putOptions).then(getBooks);
 
-//The D in CRUD is delete
-
-
-
-
-
-
-    // fetch(booksURL +"/1", deleteOptions).then(getBooks);
-
 //Loading Message: setTimeout
 
 //Put the movies in cards: Use Bootstrap
@@ -292,17 +293,3 @@ $(function(){
 
 
 })//End of document.ready
-
-// $("#userNameInput").keyup(function(e){
-//     console.log(e.key)
-//     if (e.key === "Enter"){
-//         // userName = $(this).val();
-//         // usersLastCommitDate = gitUserLastCommitAsync(userName);
-//         gitUserLastCommitAsync($(this).val()).then(response => $("#output").text(`${response}`))/
-//     }
-//
-// })
-
-
-// cat ~/.gitignore_global shows you your git ignore
-// nano ~/.gitignore_global lets you add git ignore if you don’t have it
