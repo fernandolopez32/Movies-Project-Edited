@@ -173,7 +173,7 @@ $(function(){
         fetch(`https://api.themoviedb.org/3/search/movie${J_TBD_TOKEN}&query=${userSearch}&include_adult=false`)
             .then(response => response.json())
             .then(data => {
-                poster = 'https://image.tmdb.org/t/p/w300$'
+                poster = 'https://image.tmdb.org/t/p/w300'
 
                 console.log(data.results[0].poster_path)
                 let usersMovie = {
