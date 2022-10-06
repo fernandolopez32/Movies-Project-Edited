@@ -161,32 +161,6 @@ $(function(){
             let usersMovie
             if (e.key === "Enter") {
                 usersMovie = $(this).val();
-
-                let poster;
-                function theMoviesDataBaseURL(userSearch){
-                    fetch(`https://api.themoviedb.org/3/search/movie${J_TBD_TOKEN}&query=${userSearch}&include_adult=false`)
-                    .then(response => response.json())
-                    .then(data => {
-
-                        console.log(data.results[0]);
-                        let usersMovie = {
-                            title: `${data.results[0].title}`,
-                            poster: "https://image.tmdb.org/t/p/w300$" + "/"`${data.results[0].poster_path}`,
-                            year: `${data.results[0].release_date.split("-")[0]}`
-
-
-                        }
-                        console.log(usersMovie)
-                        let putOptions = {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(usersMovie)
-                        }
-                        fetch(moviesURL, putOptions).then(getMovies)
-                    })
-                }
                 theMoviesDataBaseURL(usersMovie);
             }
         })
@@ -194,6 +168,32 @@ $(function(){
 
     postMovie()
 
+    let poster
+    function theMoviesDataBaseURL(userSearch){
+        fetch(`https://api.themoviedb.org/3/search/movie${J_TBD_TOKEN}&query=${userSearch}&include_adult=false`)
+            .then(response => response.json())
+            .then(data => {
+                poster = 'https://image.tmdb.org/t/p/w300$'
+
+                console.log(data.results[0].poster_path)
+                let usersMovie = {
+                    title: `${data.results[0].title}`,
+                    poster: `${poster}${data.results[0].poster_path}`,
+                    year: `${data.results[0].release_date.split("-")[0]}`
+
+
+                }
+                console.log(usersMovie)
+                let putOptions = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(usersMovie)
+                }
+                fetch(moviesURL, putOptions).then(getMovies)
+            })
+    }
 
 
 
