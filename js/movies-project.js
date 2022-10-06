@@ -174,15 +174,17 @@ $(function(){
             .then(response => response.json())
             .then(data => {
                 poster = 'https://image.tmdb.org/t/p/w300'
-
+                console.log(data.results[0]);
                 console.log(data.results[0].poster_path)
                 let usersMovie = {
                     title: `${data.results[0].title}`,
                     poster: `${poster}${data.results[0].poster_path}`,
-                    year: `${data.results[0].release_date.split("-")[0]}`
+                    year: `${data.results[0].release_date.split("-")[0]}`,
+                    plot: `${data.results[0].overview}`
 
 
                 }
+                console.log(poster);
                 console.log(usersMovie)
                 let putOptions = {
                     method: "POST",
