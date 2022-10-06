@@ -21,28 +21,30 @@ $(function(){
                 $("#movies").empty();
                 data.forEach((movie, index) => {
                     $("#movies").append(`
-                    <div class="card col-4 mx-auto px-0 mb-4" data-id="${movie.id}" style="width: 18rem;">
-                        <img src="${movie.poster}" class="card-img-top " alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Title: ${movie.title} (${movie.year})</h5>
-                            <p class="card-text">${movie.plot}</p>
-                            <button id="edit${movie.id}" class="button btn-primary">Edit</button>
-                            <button id="delete${movie.id}" class="button btn-danger">Delete</button>
-                        </div>
-                        
-                      <div class="editForm hiddenForm px-2 pb-3">
-                            <label for="title" class="form-label">Movie Title</label>
-                            <input type="title" class="form-control" id="title${movie.id}" placeholder="What is your favorite movie">
+                    <div class="card col-md-4 mx-auto px-0 mb-4" data-id="${movie.id}" style="width: 18rem;">
+                        <img src="${movie.poster}" class="card-img-top movieImage" alt="Movie Poster">
+                        <div class="poster-bottom opacity-75">
+                            <div class="card-body">
+                                <h5 class="card-title">Title: ${movie.title} (${movie.year})</h5>
+                                <p class="card-text">${movie.plot}</p>
+                                <button id="edit${movie.id}" class="button btn-primary">Edit</button>
+                                <button id="delete${movie.id}" class="button btn-danger">Delete</button>
+                            </div>
                             
-                            <label for="yearMade" class="form-label">Year</label>
-                            <input id="yearMade${movie.id}" class="form-control" placeholder="Year made">
-                            
-                            <label for="plot" class="form-label">Plot</label>
-                            <input id="plot${movie.id}" class="form-control" placeholder="Plot">
-                            
-                            <button id="submit${movie.id}" type="submit">Submit</button>
-                        </div>
+                            <div class="editForm hiddenForm px-2 pb-3">
+                                <label for="title" class="form-label">Movie Title</label>
+                                <input type="title" class="form-control" id="title${movie.id}" placeholder="What is your favorite movie">
+                                
+                                <label for="yearMade" class="form-label">Year</label>
+                                <input id="yearMade${movie.id}" class="form-control" placeholder="Year made">
+                                
+                                <label for="plot" class="form-label">Plot</label>
+                                <input id="plot${movie.id}" class="form-control" placeholder="Plot">
+                                
+                                <button id="submit${movie.id}" type="submit">Submit</button>
+                            </div>
    
+                        </div>
                     </div>
                     `)
                     $(`#delete${movie.id}`).on("click", function () {
@@ -156,5 +158,10 @@ $(function(){
             })
     }
 
+    /*=================ON HOVER IMAGE=======================*/
+
+    $(".movieImage").on("hover", function(){
+        alert("You hovered me!");
+    })
 
 })//End of document.ready

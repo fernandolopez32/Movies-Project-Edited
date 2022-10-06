@@ -16,3 +16,29 @@ footer {
     overflow: scroll;
     height: 80vh;
 }
+body {
+    background: #929696;
+}
+.card {
+    position: relative;
+    overflow:unset!important;
+}
+
+.poster-bottom {
+    overflow: scroll;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    background-color:#fff;
+    transition:all ease .3s;
+}
+.card:hover .poster-bottom {
+    height: 300px;
+    z-index: 99;
+}
+.movieImage {
+    height: 100%;
+    object-fit: cover;
+}
