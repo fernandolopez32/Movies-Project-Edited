@@ -125,61 +125,6 @@ $(function(){
             });
         }//End of getMovies Function
 
-    // getMovies();
-
-    /*======================DELETE A MOVIE=========================*/
-
-//The C in CRUD is Create:
-
-//In order to put Books in the Books array in the Json we have to make a POST request
-
-    const bookToPost = {
-        title: "Eleanor of Aquitaine",
-        author: {
-            firstName: "Ralph",
-            lastName: "Turner"
-        }
-    }
-
-    const postOptions = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(bookToPost)
-    }
-
-//Create a Read for the books
-
-    function getBooks(){
-        fetch(booksURL)
-            .then(response => response.json())
-            .then(data => console.log(data));
-    }
-
-    getBooks();//We see an empty array thus far, because we havent posted the books array yet
-
-
-//The below code will post the book to the books array in the json
-// fetch(booksURL, postOptions).then(getBooks)
-
-//The U in CRUD is Update
-//With PUT and PATCH requests
-//Well use PUT to replace the entire content
-//Well use PATCH to modify only part of the entry
-
-    let modification = {
-        title: "Eleanor of Aquitaine: Queen of France, Queen of England"
-    }
-
-    const patchOptions = {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(modification)
-    }
-
 /*======================MODIFYING TITLES===================*/
 
     let modifyDown = {
@@ -207,35 +152,30 @@ $(function(){
     }
 
     fetch(moviesURL+ "/2", patchDown).then(getMovies);
-    // fetch(moviesURL+ "/3", patchTenet).then(getMovies);
 
-//We need to grab the ID from the book we are modifying
 
-// fetch(booksURL + "/1", patchOptions).then(getBooks);
-
-//PUT Request
     /*=================ADDING A MOVIE FUNCTION==========================*/
-//     addAMovie()
-//     function addAMovie() {
-//         $("#userFavMovie").keyup(function (e) {
-//             if (e.key === "Enter") {
-//                 let usersMovie = {
-//                     title: `${$(this).val()}`,
-//                     poster: `"https://image.tmdb.org/t/p/lxM6kqilAdpdhqUl2biYp5frUxE.jpg"
-// `
-//                 }
-//                 console.log(usersMovie)
-//                 let putOptions = {
-//                     method: "POST",
-//                     headers: {
-//                         "Content-Type": "application/json"
-//                     },
-//                     body: JSON.stringify(usersMovie)
-//                 }
-//                 fetch(moviesURL, putOptions).then(getMovies)
-//             }
-//         })
-//     }
+//
+    function postMovie() {
+        $("#userFavMovie").keyup(function (e) {
+            if (e.key === "Enter") {
+                let usersMovie = {
+                    title: `${$(this).val()}`,
+                    poster: `"https://image.tmdb.org/t/p/w300${data.results[0].poster_path}"
+`
+                }
+                console.log(usersMovie)
+                let putOptions = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(usersMovie)
+                }
+                fetch(moviesURL, putOptions).then(getMovies)
+            }
+        })
+    }
 
 
 
@@ -279,9 +219,10 @@ $(function(){
     function addAMovie() {
         $("#userFavMovie").keyup(function (e) {
             let usersMovie;
-            if (e.key === "Enter")
+            if (e.key === "Enter") {
                 usersMovie = $(this).val()
-            theMoviesDataBaseURL(usersMovie).then(getMovies)
+                theMoviesDataBaseURL(usersMovie).then(getMovies)
+            }
         })
 
 
