@@ -34,7 +34,7 @@ $(function(){
                                 <input id="plot${movie.id}" class="form-control" placeholder="Write you own plot!">
                                 
                                 <label for="rating" class="form-label">Rating</label>
-                                <input id="rating${movie.rating}" class="form-control" placeholder="Rate it!">
+                                <input id="rating${movie.id}" class="form-control" placeholder="Rate it!">
                                 
                                 <button id="submit${movie.id}" type="submit">Submit</button>
                             </div>
@@ -66,7 +66,7 @@ $(function(){
                             title: $(`#title${movie.id}`).val(),
                             year: $(`#yearMade${movie.id}`).val(),
                             plot: $(`#plot${movie.id}`).val(),
-                            rating: $(`#rating${movie.id}`)
+                            rating: $(`#rating${movie.id}`).val()
                         }
                         const patchOption ={
                             method: 'PATCH',

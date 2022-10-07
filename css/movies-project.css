@@ -31,13 +31,13 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 0;
+    bottom: 100%;
     background-color:#fff;
     transition:all ease .3s;
 }
 .card:hover .poster-bottom {
-    height: 300px;
     z-index: 99;
+    bottom: 0;
 }
 .movieImage {
     height: 100%;
