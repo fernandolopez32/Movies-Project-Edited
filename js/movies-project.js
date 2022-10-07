@@ -1,18 +1,9 @@
 "use strict"
-// alert("Welcome to the movies project");
-
 $(function(){
-
-//URL constants:
-
-
-
+    /*=====================URL CONSTANTS=============*/
     const moviesURL = "https://stingy-prickle-sternum.glitch.me/movies"
 
-
-
     /*=====================FUNCTION THAT PRODUCES MOVIE CARDS=============*/
-
     function getMovies(){
         fetch("https://stingy-prickle-sternum.glitch.me/movies")
             .then(response => response.json())
@@ -27,6 +18,7 @@ $(function(){
                             <div class="card-body">
                                 <h5 class="card-title">Title: ${movie.title} (${movie.year})</h5>
                                 <p class="card-text">${movie.plot}</p>
+                                <p class="card-text">Rating: ${movie.rating}</p>
                                 <button id="edit${movie.id}" class="button btn-primary">Edit</button>
                                 <button id="delete${movie.id}" class="button btn-danger">Delete</button>
                             </div>
@@ -40,6 +32,9 @@ $(function(){
                                 
                                 <label for="plot" class="form-label">Plot</label>
                                 <input id="plot${movie.id}" class="form-control" placeholder="Write you own plot!">
+                                
+                                <label for="rating" class="form-label">Rating</label>
+                                <input id="rating${movie.rating}" class="form-control" placeholder="Rate it!">
                                 
                                 <button id="submit${movie.id}" type="submit">Submit</button>
                             </div>
@@ -70,7 +65,8 @@ $(function(){
                         let modification = {
                             title: $(`#title${movie.id}`).val(),
                             year: $(`#yearMade${movie.id}`).val(),
-                            plot: $(`#plot${movie.id}`).val()
+                            plot: $(`#plot${movie.id}`).val(),
+                            rating: $(`#rating${movie.id}`)
                         }
                         const patchOption ={
                             method: 'PATCH',
@@ -87,37 +83,7 @@ $(function(){
             });
         }//End of getMovies Function
 
-/*======================MODIFYING TITLES===================*/
-
-    let modifyDown = {
-        title: "Black Hawk Down"
-    }
-
-    let modifyTenet = {
-        title: "Tenet"
-    }
-
-    const patchTenet = {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(modifyTenet)
-    }
-
-    const patchDown = {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(modifyDown)
-    }
-
-    fetch(moviesURL+ "/2", patchDown).then(getMovies);
-
-
     /*=================ADDING A MOVIE FUNCTION==========================*/
-//
     function postMovie() {
         $("#userFavMovie").keyup(function (e) {
             let usersMovie;
@@ -127,9 +93,9 @@ $(function(){
             }
         })
     }
-
     postMovie()
 
+    /*================= EDITING CARDS WITH TMDB_API =======================*/
     let poster;
     function theMoviesDataBaseURL(userSearch){
         fetch(`https://api.themoviedb.org/3/search/movie${J_TBD_TOKEN}&query=${userSearch}&include_adult=false`)
@@ -143,8 +109,6 @@ $(function(){
                     poster: `${poster}${data.results[0].poster_path}`,
                     year: `${data.results[0].release_date.split("-")[0]}`,
                     plot: `${data.results[0].overview}`
-
-
                 }
                 console.log(poster);
                 console.log(usersMovie)
@@ -159,8 +123,15 @@ $(function(){
             })
     }
 
-    /*=================ON HOVER IMAGE=======================*/
-
-
-
+    let modifyDown = {
+        title: "Black Hawk Down"
+    }
+    const patchDown = {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(modifyDown)
+    }
+    fetch(moviesURL+ "/2", patchDown).then(getMovies);
 })//End of document.ready
