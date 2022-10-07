@@ -21,6 +21,7 @@ body {
 }
 .card {
     position: relative;
+    width: 18rem;
     overflow:unset!important;
 }
 

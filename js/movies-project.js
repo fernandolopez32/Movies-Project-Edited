@@ -21,7 +21,7 @@ $(function(){
                 $("#movies").empty();
                 data.forEach((movie, index) => {
                     $("#movies").append(`
-                    <div class="card col-md-4 mx-auto px-0 mb-4" data-id="${movie.id}" style="width: 18rem;">
+                    <div class="card col-md-6 mx-auto px-0 mb-4" data-id="${movie.id}">
                         <img src="${movie.poster}" class="card-img-top movieImage" alt="Movie Poster">
                         <div class="poster-bottom opacity-75">
                             <div class="card-body">
@@ -33,13 +33,13 @@ $(function(){
                             
                             <div class="editForm hiddenForm px-2 pb-3">
                                 <label for="title" class="form-label">Movie Title</label>
-                                <input type="title" class="form-control" id="title${movie.id}" placeholder="What is your favorite movie">
+                                <input type="title" class="form-control" id="title${movie.id}" placeholder="Rename the Movie!">
                                 
                                 <label for="yearMade" class="form-label">Year</label>
-                                <input id="yearMade${movie.id}" class="form-control" placeholder="Year made">
+                                <input id="yearMade${movie.id}" class="form-control" placeholder="Change the Year it was made!">
                                 
                                 <label for="plot" class="form-label">Plot</label>
-                                <input id="plot${movie.id}" class="form-control" placeholder="Plot">
+                                <input id="plot${movie.id}" class="form-control" placeholder="Write you own plot!">
                                 
                                 <button id="submit${movie.id}" type="submit">Submit</button>
                             </div>
@@ -60,6 +60,7 @@ $(function(){
                     $(`#edit${movie.id}`).on('click',function (){
                         $(this).parent().next().toggleClass('hiddenForm')
                     })
+
 
 
 //selecting the button  in the form so that on click of the submit button the card info changes
@@ -160,8 +161,6 @@ $(function(){
 
     /*=================ON HOVER IMAGE=======================*/
 
-    $(".movieImage").on("hover", function(){
-        alert("You hovered me!");
-    })
+
 
 })//End of document.ready
