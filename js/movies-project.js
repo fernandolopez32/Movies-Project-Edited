@@ -1,8 +1,8 @@
 "use strict"
 $(function(){
     /*=====================URL CONSTANTS=============*/
-    const moviesURL = "https://stingy-prickle-sternum.glitch.me/movies"
-
+    // const moviesURL1 = "https://stingy-prickle-sternum.glitch.me/movies"
+    const moviesURL = 'https://iron-quirky-laser.glitch.me/movies'
     /*=====================FUNCTION THAT PRODUCES MOVIE CARDS=============*/
     function getMovies(){
         fetch("https://stingy-prickle-sternum.glitch.me/movies")
@@ -98,7 +98,7 @@ $(function(){
     /*================= EDITING CARDS WITH TMDB_API =======================*/
     let poster;
     function theMoviesDataBaseURL(userSearch){
-        fetch(`https://api.themoviedb.org/3/search/movie${J_TBD_TOKEN}&query=${userSearch}&include_adult=false`)
+        fetch(`https://api.themoviedb.org/3/search/movie${TMDB_F_TOKEN}&query=${userSearch}&include_adult=false`)
             .then(response => response.json())
             .then(data => {
                 poster = 'https://image.tmdb.org/t/p/w300'
