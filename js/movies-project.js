@@ -2,22 +2,51 @@
 $(function(){
     /*=====================URL CONSTANTS=============*/
     const moviesURL = 'https://iron-quirky-laser.glitch.me/movies'
-    /*=====================FUNCTION THAT PRODUCES MOVIE CARDS=============*/
+
+    /*=====================GETTING MOVIES FROM GLITCH API=============*/
+    const glitchMovies =
     function getMovies(){
         fetch(moviesURL)
             .then(resp => resp.json())
-            .then(data =>{
-                console.log(data)
-                $("#movies").empty()
-                data.forEach((movie)=>{
-
-                })
+            .then(data => {
+                return data
             })
     }
-    getMovies()
-
+    printMovieCards();
     function printMovieCards(){
-        $('#movies').empty()
+            glitchMovies.forEach((movie)=> {
+                $("#movies").append(`
+                 <div class="card col-md-6 mx-auto px-0 mb-4" data-id="${movie.id}">
+                        <img src="${movie.poster}" class="card-img-top movieImage" alt="Movie Poster">
+                        <div class="poster-bottom opacity-75">
+                            <div class="card-body">
+                                <h5 class="card-title">Title: ${movie.title} (${movie.year})</h5>
+                                <p class="card-text">${movie.plot}</p>
+                                <p class="card-text">Rating: ${movie.rating}</p>
+                                <button id="edit${movie.id}" class="button btn-primary">Edit</button>
+                                <button id="delete${movie.id}" class="button btn-danger">Delete</button>
+                            </div>
+
+                            <div class="editForm hiddenForm px-2 pb-3">
+                                <label for="title" class="form-label">Movie Title</label>
+                                <input type="title" class="form-control" id="title${movie.id}" placeholder="Rename the Movie!">
+
+                                <label for="yearMade" class="form-label">Year</label>
+                                <input id="yearMade${movie.id}" class="form-control" placeholder="Change the Year it was made!">
+
+                                <label for="plot" class="form-label">Plot</label>
+                                <input id="plot${movie.id}" class="form-control" placeholder="Write you own plot!">
+
+                                <label for="rating" class="form-label">Rating</label>
+                                <input id="rating${movie.id}" class="form-control" placeholder="Rate it!">
+
+                                <button id="submit${movie.id}" type="submit">Submit</button>
+                            </div>
+
+                        </div>
+                    </div>
+                `)
+        })
     }
 //     function getMovies(){
 //         fetch("https://stingy-prickle-sternum.glitch.me/movies")
