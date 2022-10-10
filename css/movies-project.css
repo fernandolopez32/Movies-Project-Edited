@@ -1,4 +1,17 @@
 
+body {
+    background: #929696;
+    overflow-x: hidden;
+}
+
+section{
+    height: 92vh;
+    overflow: scroll;
+    background-color: #929696;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
 footer {
     background: black;
     color: white;
@@ -7,18 +20,6 @@ footer {
     display: none;
 }
 
-#tmdImage {
-    height: 100px;
-    width: 100px;
-}
-
-#movies{
-    overflow: scroll;
-    height: 80vh;
-}
-body {
-    background: #929696;
-}
 .card {
     position: relative;
     width: 18rem;
@@ -43,10 +44,8 @@ body {
     height: 100%;
     object-fit: cover;
 }
-section{
-    height: 50vh;
-    overflow: scroll;
-    background-color: #929696;
-    padding: 0;
-    margin: 0;
+
+#tmdImage {
+    height: 100px;
+    width: 100px;
 }
