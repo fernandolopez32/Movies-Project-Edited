@@ -2,17 +2,40 @@
 $(function(){
     /*=====================URL CONSTANTS=============*/
     const moviesURL = 'https://iron-quirky-laser.glitch.me/movies'
+    const tmdbURL = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_F_TOKEN}&language=en-US&query=up&page=1&include_adult=false`
+
+
+    /*=====================USER INPUT VARIABLE=============*/
+    let usersMovie
+    $('#userFavMovie').keyup('Enter',function (e){
+        if(e.key === 'Enter')
+            usersMovie = $(this).val()
+        return usersMovie
+    })
+
 
     /*=====================GETTING MOVIES FROM GLITCH API=============*/
+// const tmdbAPICall = fetch(tmdbURL);
+const glitchAPICall = fetch(moviesURL);
 
-    function getMovies(){
-        fetch(moviesURL)
-            .then(resp => resp.json())
-            .then(data => {
-                $("#movies").empty()
-                data.forEach((movie)=> {
-                    console.log(movie)
-                    $("#movies").append(`
+    // tmdbAPICall
+    //     .then(resp => resp.json())
+    //     .then(data => console.log(data));
+
+
+    glitchAPICall
+        .then(resp => resp.json())
+        .then(data =>{
+            console.log(data)
+            printMovieCards(data);
+        })
+
+
+    glitchAPICall.catch(error => console.log(error));
+
+    function printMovieCards (data){
+        data.forEach(movie => {
+            $("#movies").append(`
                     <div class="card col-md-6 mx-auto px-0 mb-4" data-id="${movie.id}">
                         <img src="${movie.poster}" class="card-img-top movieImage" alt="Movie Poster">
                         <div class="poster-bottom opacity-75">
@@ -42,12 +65,9 @@ $(function(){
 
                         </div>
                     </div>
-                `)
-            })
+                    `)
         })
     }
-
-getMovies()
 
 //     function getMovies(){
 //         fetch("https://stingy-prickle-sternum.glitch.me/movies")
