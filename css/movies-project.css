@@ -44,6 +44,9 @@ body {
     object-fit: cover;
 }
 section{
-    height: 90vh;
+    height: 50vh;
     overflow: scroll;
+    background-color: #929696;
+    padding: 0;
+    margin: 0;
 }
