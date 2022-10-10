@@ -6,12 +6,12 @@ $(function(){
 
 
     /*=====================USER INPUT VARIABLE=============*/
-    let usersMovie
-    $('#userFavMovie').keyup('Enter',function (e){
-        if(e.key === 'Enter')
-            usersMovie = $(this).val()
-        return usersMovie
-    })
+    // let usersMovie
+    // $('#userFavMovie').keyup('Enter',function (e){
+    //     if(e.key === 'Enter')
+    //         usersMovie = $(this).val()
+    //     return usersMovie
+    // })
 
 
     /*=====================GETTING MOVIES FROM GLITCH API=============*/
@@ -67,6 +67,7 @@ const glitchAPICall = fetch(moviesURL);
                     </div>
                     `)
         })
+        postMovie()
     }
 
 //     function getMovies(){
@@ -147,58 +148,40 @@ const glitchAPICall = fetch(moviesURL);
 //                 })
 //             });
 //         }//End of getMovies Function
-//
-//     /*=================ADDING A MOVIE FUNCTION==========================*/
-//     function postMovie() {
-//         $("#userFavMovie").keyup(function (e) {
-//             let usersMovie;
-//             if (e.key === "Enter") {
-//                 usersMovie = $(this).val();
-//                 theMoviesDataBaseURL(usersMovie);
-//             }
-//         })
-//     }
-//     postMovie()
-//
-//     /*================= EDITING CARDS WITH TMDB_API =======================*/
-//     let poster;
-//     function theMoviesDataBaseURL(userSearch){
-//         fetch(`https://api.themoviedb.org/3/search/movie${TMDB_F_TOKEN}&query=${userSearch}&include_adult=false`)
-//             .then(response => response.json())
-//             .then(data => {
-//                 poster = 'https://image.tmdb.org/t/p/w300'
-//                 console.log(data.results[0]);
-//                 console.log(data.results[0].poster_path)
-//                 let usersMovie = {
-//                     title: `${data.results[0].title}`,
-//                     poster: `${poster}${data.results[0].poster_path}`,
-//                     year: `${data.results[0].release_date.split("-")[0]}`,
-//                     plot: `${data.results[0].overview}`
-//                 }
-//                 console.log(poster);
-//                 console.log(usersMovie)
-//                 let putOptions = {
-//                     method: "POST",
-//                     headers: {
-//                         "Content-Type": "application/json"
-//                     },
-//                     body: JSON.stringify(usersMovie)
-//                 }
-//                 fetch(moviesURL, putOptions).then(getMovies)
-//             })
-//     }
-//
-//     let modifyDown = {
-//         title: "Black Hawk Down"
-//     }
-//     const patchDown = {
-//         method: "PATCH",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(modifyDown)
-//     }
-//     fetch(moviesURL+ "/2", patchDown).then(getMovies);
-//
-//
+
+
+let poster = 'https://image.tmdb.org/t/p/w300'
+           /*=================ADDING A MOVIE FUNCTION==========================*/
+    function postMovie() {
+        $("#userFavMovie").keyup(function (e) {
+            let usersMovie;
+            if (e.key === "Enter") {
+                usersMovie = $(this).val();
+                theMoviesDataBaseURL(usersMovie);
+            }
+        })
+    }
+     /*================= ADDING NEW CARDS WITH TMDB_API POST METHOD =======================*/
+    function theMoviesDataBaseURL(userSearch){
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_F_TOKEN}&query=${userSearch}&include_adult=false`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.results[0].title)
+                let usersMovie = {
+                    title: `${data.results[0].title}`,
+                    poster: `${poster}${data.results[0].poster_path}`,
+                    year: `${data.results[0].release_date.split("-")[0]}`,
+                    plot: `${data.results[0].overview}`
+                }
+                let putOptions = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(usersMovie)
+                }
+                fetch(moviesURL, putOptions).then(postMovie)
+            })
+    }
+
 });
