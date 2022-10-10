@@ -4,19 +4,16 @@ $(function(){
     const moviesURL = 'https://iron-quirky-laser.glitch.me/movies'
 
     /*=====================GETTING MOVIES FROM GLITCH API=============*/
-    const glitchMovies =
+
     function getMovies(){
         fetch(moviesURL)
             .then(resp => resp.json())
             .then(data => {
-                return data
-            })
-    }
-    printMovieCards();
-    function printMovieCards(){
-            glitchMovies.forEach((movie)=> {
-                $("#movies").append(`
-                 <div class="card col-md-6 mx-auto px-0 mb-4" data-id="${movie.id}">
+                $("#movies").empty()
+                data.forEach((movie)=> {
+                    console.log(movie)
+                    $("#movies").append(`
+                    <div class="card col-md-6 mx-auto px-0 mb-4" data-id="${movie.id}">
                         <img src="${movie.poster}" class="card-img-top movieImage" alt="Movie Poster">
                         <div class="poster-bottom opacity-75">
                             <div class="card-body">
@@ -46,8 +43,12 @@ $(function(){
                         </div>
                     </div>
                 `)
+            })
         })
     }
+
+getMovies()
+
 //     function getMovies(){
 //         fetch("https://stingy-prickle-sternum.glitch.me/movies")
 //             .then(response => response.json())

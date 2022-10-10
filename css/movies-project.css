@@ -45,4 +45,5 @@ body {
 }
 section{
     height: 90vh;
+    overflow: scroll;
 }
