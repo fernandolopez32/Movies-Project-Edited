@@ -15,12 +15,7 @@ $(function(){
 
 
     /*=====================GETTING MOVIES FROM GLITCH API=============*/
-// const tmdbAPICall = fetch(tmdbURL);
 const glitchAPICall = fetch(moviesURL);
-
-    // tmdbAPICall
-    //     .then(resp => resp.json())
-    //     .then(data => console.log(data));
 
 
     glitchAPICall
@@ -66,8 +61,19 @@ const glitchAPICall = fetch(moviesURL);
                         </div>
                     </div>
                     `)
+                $(`#delete${movie.id}`).on("click", function () {
+                    const deleteOptions = {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "applications/json"
+                        }
+                    }
+                    fetch(moviesURL + "/"+ movie.id, deleteOptions).then(printMovieCards)
+                });
+
+
         })
-        postMovie()
+        postMovie();
     }
 
 //     function getMovies(){
@@ -183,5 +189,7 @@ let poster = 'https://image.tmdb.org/t/p/w300'
                 fetch(moviesURL, putOptions).then(postMovie)
             })
     }
+
+
 
 });
